@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auth CORS Test — Home</title>
+  </head>
+  <body>
+    <header>
+      <h1>Auth Service — Domain / CORS Test Frontend</h1>
+      <p>Minimal UI to verify <code>CORS_ORIGINS</code> allowlist on auth-service-go.</p>
+      <nav>
+        <a href="/" class="active">Home</a>
+        <a href="/signup.html">Signup</a>
+        <a href="/login.html">Login</a>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <div class="panel">
+        <h2>Configuration</h2>
+        <dl class="debug-meta">
+          <dt>Auth target</dt>
+          <dd id="config-target">—</dd>
+          <dt>Current origin</dt>
+          <dd id="config-origin">—</dd>
+          <dt>API base URL</dt>
+          <dd id="config-api">—</dd>
+          <dt>Swagger docs</dt>
+          <dd id="config-docs">—</dd>
+          <dt>Configured CORS origins (VITE_CORS_ORIGINS)</dt>
+          <dd id="config-allowed">—</dd>
+        </dl>
+        <div id="cors-status" class="origin-banner" style="margin-top: 1rem;">—</div>
+
+        <h3>Quick checks</h3>
+        <button type="button" id="btn-health" class="secondary">GET /health (no API key)</button>
+        <button type="button" id="btn-preflight-index" class="secondary">Test OPTIONS preflight</button>
+        <pre id="health-result" class="code-block">—</pre>
+
+        <h3>Pages</h3>
+        <p>
+          Use <a href="/signup.html">Signup</a> for the full OTP signup flow, or
+          <a href="/login.html">Login</a> for OTP login. Each page includes a debug panel with
+          request/response details.
+        </p>
+      </div>
+
+      <div id="debug-panel"></div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

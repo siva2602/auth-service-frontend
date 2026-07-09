@@ -1,0 +1,20 @@
+{
+  "name": "auth-domain-restriction-test",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Minimal frontend to test auth-service-go CORS / domain allowlist",
+  "scripts": {
+    "dev": "vite",
+    "dev:local": "vite --port 3000",
+    "dev:dev": "VITE_AUTH_TARGET=dev vite --port 3000",
+    "dev:3000": "vite --port 3000",
+    "dev:5174": "vite --port 5174",
+    "dev:4000": "vite --port 4000 --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "preview:3000": "vite preview --port 3000"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

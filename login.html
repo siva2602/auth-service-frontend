@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login — Auth CORS Test</title>
+  </head>
+  <body>
+    <header>
+      <h1>Login — OTP flow</h1>
+      <p id="config-summary">—</p>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/signup.html">Signup</a>
+        <a href="/login.html" class="active">Login</a>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <div class="panel">
+        <h2>Login wizard</h2>
+
+        <div class="step-indicator">
+          <span id="step-1" class="step active">1. Send OTP</span>
+          <span id="step-2" class="step">2. Verify OTP</span>
+          <span id="step-3" class="step">3. Tokens issued</span>
+        </div>
+
+        <div id="otp-help" class="origin-banner" style="margin-bottom: 1rem; border-color: rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.08);">
+          OTP codes: <code>docker compose -f deploy/docker/docker-compose.yml logs -f auth | grep verification</code>
+          Use a handle/phone/email from a completed signup. Same phone/email can only request OTP once per minute.
+        </div>
+        <div id="otp-hint" class="origin-banner hidden"></div>
+
+        <label for="otp-mode">OTP channel mode</label>
+        <select id="otp-mode">
+          <option value="phone">phone</option>
+          <option value="email">email</option>
+          <option value="both" selected>both</option>
+        </select>
+
+        <label for="handle">Handle</label>
+        <input id="handle" type="text" placeholder="alice" value="testuser" />
+
+        <div id="phone-group">
+          <label for="phone">Phone (E.164)</label>
+          <input id="phone" type="text" placeholder="+919876543210" value="+919876543210" />
+        </div>
+
+        <div id="email-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="alice@example.com" value="alice@example.com" />
+        </div>
+
+        <button type="button" id="btn-send-otp">Send login OTP</button>
+
+        <hr style="border-color: var(--border); margin: 1rem 0;" />
+
+        <label for="otp-session-id">OTP session ID</label>
+        <input id="otp-session-id" type="text" placeholder="From send response" />
+
+        <div id="phone-code-group">
+          <label for="phone-code">Phone code</label>
+          <input id="phone-code" type="text" placeholder="From auth service logs" />
+        </div>
+
+        <div id="email-code-group">
+          <label for="email-code">Email code</label>
+          <input id="email-code" type="text" placeholder="From auth service logs" />
+        </div>
+
+        <button type="button" id="btn-resend-otp" class="secondary">Resend OTP</button>
+        <button type="button" id="btn-verify-otp">Verify OTP</button>
+
+        <div class="response-history">
+          <h3>Response history</h3>
+          <div id="response-history"></div>
+        </div>
+      </div>
+
+      <div id="debug-panel"></div>
+    </div>
+
+    <script type="module" src="/src/login.js"></script>
+  </body>
+</html>
