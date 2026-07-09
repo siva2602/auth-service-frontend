@@ -5,17 +5,29 @@
 
 const STORAGE_KEY_DEVICE = 'auth-test-device-id';
 
+import { resolveAuthTarget } from './auth-targets.js';
+
+/** UUID v4 — works in non-secure HTTP contexts where crypto.randomUUID is unavailable. */
+function generateUUID() {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
 /** @returns {string} */
 export function getDeviceId() {
   let id = localStorage.getItem(STORAGE_KEY_DEVICE);
   if (!id) {
-    id = crypto.randomUUID();
+    id = generateUUID();
     localStorage.setItem(STORAGE_KEY_DEVICE, id);
   }
   return id;
 }
-
-import { resolveAuthTarget } from './auth-targets.js';
 
 const target = resolveAuthTarget();
 
